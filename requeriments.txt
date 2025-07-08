@@ -1,0 +1,6 @@
+pymongo
+python-dotenv
+scikit-learn
+pandas
+matplotlib
+tabulate
