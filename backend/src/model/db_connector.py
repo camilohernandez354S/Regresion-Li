@@ -18,6 +18,12 @@ class MongoDBConnection:
         self.db = None
         self.collection = None
         
+        self._connect_to_mongo()
+
+    def _connect_to_mongo(self):
+        """
+        Conecta a MongoDB usando las variables de entorno.
+        """
         try:
             # Verificar que las variables de entorno estén cargadas correctamente
             mongo_uri = os.getenv("MONGO_URI")
@@ -33,7 +39,7 @@ class MongoDBConnection:
             self.collection = self.db[collection_name]
             print("Conexión exitosa a MongoDB.")
         
-        except ConnectionError as e:
+        except PyMongoError as e:
             print(f"Error al conectar a MongoDB: {e}")
         except ValueError as e:
             print(f"Error de configuración: {e}")
@@ -42,11 +48,11 @@ class MongoDBConnection:
 
     def get_collection(self):
         """
-        Devuelve la colección de MongoDB a la que se está conectado.
+        Devuelve la colección de MongoDB a la que está conectado.
+        Si no está conectada, lanza una excepción.
         """
-        if  self.collection is None:
-            print("No se ha establecido conexión con la colección.")
-            return None
+        if self.collection is None:
+            raise ConnectionError("No se ha establecido conexión con la colección.")
         return self.collection
 
 
@@ -70,11 +76,16 @@ class MongoDBInsertion:
         Args:
             data (list): Datos a insertar en MongoDB.
         """
+        if not data:
+            print("No hay datos para insertar.")
+            return
+
         for record in data:
             descripcion = record.get('descripcion')
             precio = record.get('precio')
             area = record.get('area')
 
+            # Validar campos
             if descripcion and precio and area:
                 existing_doc = self.collection.find_one({"descripcion": descripcion, "precio": precio, "area": area})
 
