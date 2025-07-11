@@ -25,7 +25,7 @@ class ExcelToMongo:
         db_connector.insert_data(cleaned_data.to_dict(orient="records"))
 
 if __name__ == "__main__":
-    file_path = r"C:\Users\Kevin Prada\Downloads\dataset_vivienda.xlsx"
+    file_path = r"C:\Documentos\trabajos\Programing\todo de codigo\visulal\ADSO_8\Relacion_lineal\dataset_vivienda.xlsx"
 
     excel_to_mongo = ExcelToMongo(file_path)
     excel_to_mongo.insert_data_to_mongo()
