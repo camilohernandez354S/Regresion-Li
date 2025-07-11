@@ -1,26 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <header>
+      <h1>Bienvenido a MiCasaYa - Estimación de Precios de Viviendas</h1>
+    </header>
+    <main>
+      <PropertyEstimator />
+    </main>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PropertyEstimator from './components/PropertyEstimator.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    PropertyEstimator
   }
-}
+};
 </script>
 
-<style>
+<style scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Arial', sans-serif;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
 }
 </style>
